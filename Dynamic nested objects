@@ -1,0 +1,36 @@
+// Write code to parse urls into a sitemap tree structure and display it as text. For example, the following urls will result in this printed structure.
+//
+// Milestones:
+// 1. Parse routes into data structure
+// 2. Print data structure as simply as possible to check parsing
+// 3. Format text output like shown in below
+//
+// Input:
+const routes = [
+
+    '/home/anti-depressants/xanax',
+	  '/a/b/c',
+	  '/d/e/f/g/h'
+
+
+]
+
+function treeRoute(routes){
+  let j;
+	let map={};
+	let array=[];
+
+  for(let i=0;i<routes.length;i++){
+		console.log("map stage -->i",map,i)
+	  let reference = map;
+    let splitRoute = routes[i].split('/').slice(1) ;
+    console.log(splitRoute);
+		console.log(splitRoute.length)
+    for(j=0;j<splitRoute.length;j++){
+			//if  reference[splitRoute[j]] value is different from other values on same level then give it a {} otherwise enter the same value object . Again check for values in same level , if same enter that value object , check then loop.
+      reference[splitRoute[j]] = {};
+			reference = reference[splitRoute[j]]
+    }
+  }
+  return map;
+}
