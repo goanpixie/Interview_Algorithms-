@@ -9,7 +9,7 @@
 const routes = [
 
     '/home/anti-depressants/xanax',
-	  '/a/b/c',
+    '/home/heart/b/c',
 	  '/d/e/f/g/h'
 
 
@@ -19,7 +19,7 @@ function treeRoute(routes){
   let j;
 	let map={};
 	let array=[];
-
+	
   for(let i=0;i<routes.length;i++){
 		console.log("map stage -->i",map,i)
 	  let reference = map;
@@ -28,8 +28,25 @@ function treeRoute(routes){
 		console.log(splitRoute.length)
     for(j=0;j<splitRoute.length;j++){
 			//if  reference[splitRoute[j]] value is different from other values on same level then give it a {} otherwise enter the same value object . Again check for values in same level , if same enter that value object , check then loop.
-      reference[splitRoute[j]] = {};
-			reference = reference[splitRoute[j]]
+			
+			let keys = Object.keys(reference);
+			let current_key = splitRoute[j];
+			console.log("keys++++++->", keys);
+			console.log("[splitRoute[j]]=======",splitRoute[j]);
+			
+			
+			if(keys.indexOf(splitRoute[j]) === -1){
+				console.log("Not Same key")
+				reference = reference[splitRoute[j]] = {};
+			}
+			else{
+				console.log("Same key")
+				let object2 = {[splitRoute[j]]:{}}
+				console.log("object2",object2)
+				reference = Object.assign(object2, home.current_key);
+				console.log("reference------->", reference);
+				// home.current_key = splitRoute[j] = {} ;
+			}
     }
   }
   return map;
