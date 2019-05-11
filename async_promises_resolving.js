@@ -37,3 +37,25 @@ let asyncMap = async function(jobs, callback){
 }
 
 asyncMap(jobs, callback); // 'first', 'second', 'third'
+
+//Promises in order(more effective time wise):
+
+let asyncMap = async function(jobs, callback){
+  let Promise_array =[];
+    for(let i=0;i<jobs.length;i++){
+      let result = new Promise((resolve)=>{
+      jobs[i](resolve);
+      });
+      //push promises to the promise array not results
+      Promise_array.push(result);
+    }
+    console.log("Promise_array", Promise_array);
+    //loop through promises and get values
+    Promise.all(Promise_array).then(
+    results=>{
+      return callback(results);
+    });
+  };
+  console.time("t");
+  asyncMap(jobs, callback); //["first","second","third"]
+  console.timeEnd("t")
